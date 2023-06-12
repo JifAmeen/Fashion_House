@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actions from "../constants/cartConstants";
-import API_BASE_URL from "./config";
+import API_BASE_URL from "../../config";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(API_BASE_URL + `/api/products/${id}`);

@@ -1,7 +1,7 @@
 import * as actions from "../constants/orderConstants";
 import axios from "axios";
 import { logout } from "./userActions";
-import API_BASE_URL from "./config";
+import API_BASE_URL from "../../config";
 
 export const createOrder = (dataOrder) => async (dispatch, getState) => {
   try {

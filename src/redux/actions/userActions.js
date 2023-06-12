@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actions from "../constants/userConstants.js";
-import API_BASE_URL from "./config";
+import API_BASE_URL from "../../config";
 
 export const login = (email, password) => async (dispatch) => {
   try {
