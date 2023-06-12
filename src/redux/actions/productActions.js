@@ -1,6 +1,7 @@
 import * as actions from "../constants/productConstants";
 import axios from "axios";
 import { logout } from "./userActions";
+import API_BASE_URL from "./config";
 
 export const listProduct =
   (keyword = "", pageNumber = "") =>
@@ -9,7 +10,7 @@ export const listProduct =
       dispatch({ type: actions.PRODUCT_LIST_REQUEST });
 
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `${API_BASE_URL}/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
       );
 
       dispatch({ type: actions.PRODUCT_LIST_SUCCESS, payload: data });
@@ -29,7 +30,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     dispatch({ type: actions.PRODUCT_DETAILS_RESET });
     dispatch({ type: actions.PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/products/${id}`);
+    const { data } = await axios.get(`${API_BASE_URL}/api/products/${id}`);
 
     dispatch({ type: actions.PRODUCT_DETAILS_SUCCESS, payload: data.product });
   } catch (error) {
@@ -58,7 +59,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/products/${id}`, config);
+    await axios.delete(`${API_BASE_URL}/api/products/${id}`, config);
 
     dispatch({ type: actions.PRODUCT_DELETE_SUCCESS });
   } catch (error) {
@@ -91,7 +92,7 @@ export const createProduct = (dataProduct) => async (dispatch, getState) => {
       },
     };
 
-    await axios.post(`/api/products`, dataProduct, config);
+    await axios.post(`${API_BASE_URL}/api/products`, dataProduct, config);
 
     dispatch({ type: actions.PRODUCT_CREATE_SUCCESS });
   } catch (error) {
@@ -124,7 +125,11 @@ export const updateProduct = (dataProduct) => async (dispatch, getState) => {
       },
     };
 
-    await axios.put(`/api/products/${dataProduct._id}`, dataProduct, config);
+    await axios.put(
+      `${API_BASE_URL}/api/products/${dataProduct._id}`,
+      dataProduct,
+      config
+    );
 
     dispatch({ type: actions.PRODUCT_UPDATE_SUCCESS });
     dispatch({ type: actions.PRODUCT_UPDATE_RESET });
@@ -159,7 +164,11 @@ export const createProductReview =
         },
       };
 
-      await axios.post(`/api/products/${productId}/reviews`, review, config);
+      await axios.post(
+        `${API_BASE_URL}/api/products/${productId}/reviews`,
+        review,
+        config
+      );
 
       dispatch({ type: actions.PRODUCT_CREATE_REVIEW_SUCCESS });
     } catch (error) {
@@ -181,7 +190,7 @@ export const listTopProducts = () => async (dispatch) => {
   try {
     dispatch({ type: actions.PRODUCT_TOP_REQUEST });
 
-    const { data } = await axios.get(`/api/products/top`);
+    const { data } = await axios.get(`${API_BASE_URL}/api/products/top`);
 
     dispatch({ type: actions.PRODUCT_TOP_SUCCESS, payload: data.products });
   } catch (error) {

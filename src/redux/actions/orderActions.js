@@ -1,6 +1,7 @@
 import * as actions from "../constants/orderConstants";
 import axios from "axios";
 import { logout } from "./userActions";
+import API_BASE_URL from "./config";
 
 export const createOrder = (dataOrder) => async (dispatch, getState) => {
   try {
@@ -17,7 +18,11 @@ export const createOrder = (dataOrder) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("/api/orders", dataOrder, config);
+    const { data } = await axios.post(
+      API_BASE_URL + "/api/orders",
+      dataOrder,
+      config
+    );
 
     dispatch({ type: actions.ORDER_CREATE_SUCCESS, payload: data.order });
   } catch (error) {
@@ -50,7 +55,10 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/${id}`, config);
+    const { data } = await axios.get(
+      API_BASE_URL + `/api/orders/${id}`,
+      config
+    );
 
     dispatch({ type: actions.ORDER_DETAILS_SUCCESS, payload: data.order });
   } catch (error) {
@@ -85,7 +93,7 @@ export const payOrder =
       };
 
       const { data } = await axios.put(
-        `/api/orders/${orderId}/pay`,
+        API_BASE_URL + `/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -120,7 +128,11 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
       },
     };
 
-    await axios.put(`/api/orders/${orderId}/deliver`, {}, config);
+    await axios.put(
+      API_BASE_URL + `/api/orders/${orderId}/deliver`,
+      {},
+      config
+    );
 
     dispatch({ type: actions.ORDER_DELIVER_SUCCESS });
   } catch (error) {
@@ -153,7 +165,10 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/myorders`, config);
+    const { data } = await axios.get(
+      API_BASE_URL + `/api/orders/myorders`,
+      config
+    );
 
     dispatch({ type: actions.ORDER_LIST_MY_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -186,7 +201,7 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/`, config);
+    const { data } = await axios.get(API_BASE_URL + `/api/orders/`, config);
     dispatch({ type: actions.ORDER_LIST_SUCCESS, payload: data.orders });
   } catch (error) {
     const message =
