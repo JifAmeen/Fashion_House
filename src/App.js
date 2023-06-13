@@ -23,7 +23,7 @@ import OrderListScreen from "./screens/OrderListScreen";
 
 const App = () => {
   return (
-    <BrowserRouter basename="https://fashion-house.onrender.com/">
+    <BrowserRouter>
       <Header />
       <main className="py-4">
         <Container>
