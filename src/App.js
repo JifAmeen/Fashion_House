@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
@@ -23,7 +23,7 @@ import OrderListScreen from "./screens/OrderListScreen";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="https://fashion-house.onrender.com/">
       <Header />
       <main className="py-4">
         <Container>
